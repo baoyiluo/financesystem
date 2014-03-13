@@ -5,7 +5,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
-from django.views.generic import TemplateView
+from financeweb.apphome import views
 import os
 from settings import PROJECT_ROOT
 
@@ -46,11 +46,16 @@ urlpatterns += patterns('',
         'django.views.static.serve',
         {"document_root": os.path.join(
             PROJECT_ROOT, "templates/static/stylesheets").replace("\\", "/")}),
+    url(r'^css/(?P<path>.*)$',
+        'django.views.static.serve',
+        {"document_root": os.path.join(
+            PROJECT_ROOT, "templates/static/css").replace("\\", "/")}),
     url(r'^javascripts/(?P<path>.*)$',
         'django.views.static.serve',
         {"document_root": os.path.join(
             PROJECT_ROOT, "templates/static/javascripts").replace("\\", "/")}),
-    url("^$", TemplateView.as_view(template_name="index.html"), name="home"),
+    url("^$", views.Index.as_view(), name="home"),
+    ("^sign/", include('financeweb.appsign.urls')),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
