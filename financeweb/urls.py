@@ -6,6 +6,8 @@ from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
 from django.views.generic import TemplateView
+import os
+from settings import PROJECT_ROOT
 
 admin.autodiscover()
 
@@ -32,6 +34,22 @@ urlpatterns += patterns('',
     # one out.
 
     #url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    url(r'^images/(?P<path>.*)$',
+        'django.views.static.serve',
+        {"document_root": os.path.join(
+            PROJECT_ROOT, "templates/static/images").replace("\\", "/")}),
+    url(r'^font/(?P<path>.*)$',
+        'django.views.static.serve',
+        {"document_root": os.path.join(
+            PROJECT_ROOT, "templates/static/font").replace("\\", "/")}),
+    url(r'^stylesheets/(?P<path>.*)$',
+        'django.views.static.serve',
+        {"document_root": os.path.join(
+            PROJECT_ROOT, "templates/static/stylesheets").replace("\\", "/")}),
+    url(r'^javascripts/(?P<path>.*)$',
+        'django.views.static.serve',
+        {"document_root": os.path.join(
+            PROJECT_ROOT, "templates/static/javascripts").replace("\\", "/")}),
     url("^$", TemplateView.as_view(template_name="index.html"), name="home"),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
