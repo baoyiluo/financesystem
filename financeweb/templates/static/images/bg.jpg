@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>FreelanceSuite | Error | Client, Project, and Billing Management Software Application</title>
+    <meta name="keywords" content="project management, client management, software, online application, freelance, design, consultant, developer software, management, billing, client billing, design billing, freelance management, helpdesk, support sofware, support" />
+    <meta name="description" content="Freelance Suite is a web-based software application that simplifies project &amp; client management software. Our flexible licensing solutions are pefect for small and large businesses, alike.  Manage clients, billing, projects, and support - All with Freelance Suite" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="author" content="http://www.freelancesuite.com" />
+    <link href="http://freelancesuite.com/styles/fs.css" rel="stylesheet" type="text/css" media="all" />
+    <!--[if lt IE 9]>
+    <script src="http://freelancesuite.com/scripts/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-41314696-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+	</script>
+</head>
+<body id="page_error">
+	<header>
+    	<div class="container">
+            <a href="http://freelancesuite.com" id="logo"></a>
+            <nav id="nav-container">
+            	<a href="http://freelancesuite.com" id="nav-home">Home</a>
+                <a href="http://freelancesuite.com/tour" id="nav-tour">Tour</a>
+                <a href="http://freelancesuite.com/support/faq" id="nav-faq">FAQ</a>
+                <a href="http://freelancesuite.com/support" id="nav-support">Support</a>
+                <a href="http://freelancesuite.com/tour/demo" id="nav-demo">Demo</a>
+                <a href="http://freelancesuite.com/buy" id="nav-pricing">Buy</a>
+            </nav>
+            <a href="#info" id="login-link">Customer Login</a>
+        </div>
+    </header>
+    <section id="tour-header">
+    	<div class="container-tour">
+        	<img src="http://freelancesuite.com/images/title_fs_powerful.png" alt="Freelance Suite" id="title-tour" />
+        </div>
+    </section>
+    <section id="tour-main">
+    	<div class="container">
+        	<h2>Sorry!  This page doesn't exist.</h2>
+            <h3>Either we messed up.  Or you messed up.</h3>
+            <br><br><br>
+            <h3>Feel free to look around for the page you were trying to access.  Our website developers have been notified that you've encountered this error page, so we're already looking into it.  Thanks for visiting our site.</h3>
+            <br><br><br><br>
+            <br><br><br><br>
+            <br><br><br><br>
+        </div>
+    </section>
+    <section id="info">
+    	<div class="container">
+        	<div class="info-block">
+            	<span>FREELANCE SUITE</span>
+                <a href="http://freelancesuite.com/tour">Tour</a>
+                <a href="http://freelancesuite.com/buy">Buy Now</a>
+                <a href="http://freelancesuite.com/tour/demo">Demo</a>
+                <a href="http://freelancesuite.com/for-designers">Designers</a>
+                <a href="http://freelancesuite.com/for-developers">Developers</a>
+                
+         	</div>
+            <div class="info-block">
+            	<span>SUPPORT</span>
+                <a href="http://freelancesuite.com/contact">Contact Us</a>
+                <a href="http://freelancesuite.com/support">Help Desk</a>
+                <a href="http://freelancesuite.com/kb">Knowledge Base</a>
+                <a href="http://freelancesuite.com/support/faq">FAQs</a>
+                <a href="http://freelancesuite.com/release-information">Release Log</a>
+         	</div>
+            <div class="info-block">
+            	<span>PARTNERS</span>
+                <a href="http://freelancesuite.com/programs/affiliates">Sales Affiliates</a>
+                <a href="http://freelancesuite.com/programs/volume">Volume Discounts</a>
+                <a href="http://freelancesuite.com/programs/beta">Beta Program</a>
+         	</div>
+            <div class="info-block-end">
+            	<span>CUSTOMER LOGIN</span>
+				<form name="login" id="login" action="http://freelancesuite.com/customers/index.php?task=login" method="post" >
+                	<input name="email" id="username" placeholder="Email Address">
+                    <input name="password" id="password" placeholder="Password" type="password">
+                    <input type='hidden' id='task' name='task' value='login' />
+                        <input type='hidden' id='do' name='do' value='login' />
+                	<button name="login-submit" id="login-submit"></button>
+				</form>    
+			</div>
+        </div>
+    </section>
+    <footer>
+    	<div class="container">
+        	<p>Copyright © 2008-2014 Freelance Suite
+            <br> Project Management, Client Management, Billing Management Software</p>
+        </div>
+    </footer>
+</body>
+</html>
