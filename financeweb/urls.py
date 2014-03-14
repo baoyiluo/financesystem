@@ -54,6 +54,10 @@ urlpatterns += patterns('',
         'django.views.static.serve',
         {"document_root": os.path.join(
             PROJECT_ROOT, "templates/static/javascripts").replace("\\", "/")}),
+    url(r'^bootstrap/(?P<path>.*)$',
+        'django.views.static.serve',
+        {"document_root": os.path.join(
+            PROJECT_ROOT, "templates/static/bootstrap").replace("\\", "/")}),
     url("^$", views.Index.as_view(), name="home"),
     ("^sign/", include('financeweb.appsign.urls')),
 
@@ -93,7 +97,7 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    #("^", include("mezzanine.urls")),
+    ("^", include("mezzanine.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

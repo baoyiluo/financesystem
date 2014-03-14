@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+import models
 def auth_required(view):
     """"身份认证装饰器"""
     def decorator(self, request, *args, **kwargs):
@@ -21,5 +22,6 @@ class Index(View):
     template_name = 'index.html'
     @auth_required
     def get(self, request):
-        username = request.user.username
-        return render_to_response(self.template_name, {'username': username})
+        username =request.user.username
+        objects = models.Finance.objects.all()
+        return render_to_response(self.template_name, {'username': username, 'objects':objects})

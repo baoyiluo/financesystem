@@ -9,6 +9,7 @@ class Finance(models.Model):
         ('1', _(u"入账"))
     )
     startperson = models.ForeignKey(User)
+    maneycount = models.DecimalField(max_digits=8,decimal_places=2)
     financename = models.CharField(_('name'), max_length=80)
     financeintro = models.CharField(_('intro'), max_length=80)
     examineperson = models.ManyToManyField(User, null=True, blank=True, related_name="examineperson", verbose_name=_("users"))
