@@ -297,7 +297,7 @@
 
   <ul class="top-notifications">
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'examineshow' %}">
+      <a class="dropdown-toggle"  href="{% url 'examineshow' %}">
         Messages  <span class="badge dark-blue" id="messageid">0</span>
       </a>
 
@@ -322,7 +322,7 @@
     <hr class="main">
     <ul class="breadcrumbs">
       <li>
-        <a class="crumb active" href="#">财务总览</a>
+        <a class="crumb active" href="#">{% block "righttop" %}首页{% endblock %}</a>
       </li>
     </ul>
     <hr class="main">
