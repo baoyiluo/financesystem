@@ -15,6 +15,18 @@
     $(function(){
         $values=window.document.location.pathname.split('/')[1];
         $('#'+$values).addClass('active');
+        $.ajax({
+            url:"{% url 'getexaminemessages' %}",
+            type:'get',
+            success:function(data){
+                if(!isNaN(data)){
+                    $('#messageid').html(data);
+                }else{
+                    alert("数据错误");
+                }
+            }
+        
+        });
     });
     function ajax_to_dialog(formid, url, title,sta){
         $('#dialog-title').html(title); 
@@ -269,15 +281,9 @@
 
   <ul class="top-notifications">
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Messages  <span class="badge dark-blue">3</span>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'examineshow' %}">
+        Messages  <span class="badge dark-blue" id="messageid">0</span>
       </a>
-      <ul id="messages" class="dropdown-menu top-bar-list">
-        <li><a>New message</a></li>
-        <li><a>Inbox <span class="count">(8)</span></a></li>
-        <li><a>Sent</a></li>
-        <li><a>Drafts</a></li>
-      </ul>
 
     </li>
 
