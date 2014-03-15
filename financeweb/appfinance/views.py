@@ -9,7 +9,6 @@ from financeweb.apphome.views import auth_required
 
 class ExamineMessages(View):
     model = models.Finance
-    @auth_required
     def get(self, request, *args, **kwargs):
         financelist = self.model.objects.filter(status=0)
         count=0
@@ -38,6 +37,14 @@ class ExamineDate(View):
             if request.user not in finance.examineperson.all():  
                 objects.append(finance)
         return render_to_response(self.template_name, {'username': username,'objects':objects})
+
+class ExamineHistroyDate(View):
+    template_name = 'appfinance/examinehistoryshow.html'
+    @auth_required
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        objects = user.financeuser_set.all()
+        return render_to_response(self.template_name, {'objects':objects})
 
 class ExaminemakeShow(View):
     template_name = 'appfinance/examinemakeshow.html'
