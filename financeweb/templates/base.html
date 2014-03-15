@@ -8,10 +8,54 @@
   <title>NUS</title>
 
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
-  <link href="stylesheets/application.css" media="all" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
-  <script src="javascripts/application.js" type="text/javascript"></script>
+  <link href="/stylesheets/application.css" media="all" rel="stylesheet" type="text/css" />
+  <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800"-->
+  <script src="/javascripts/application.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(function(){
+        $values=window.document.location.pathname.split('/')[1];
+        $('#'+$values).addClass('active');
+    });
+    function ajax_to_dialog(formid, url, title,sta=false){
+        $('#dialog-title').html(title); 
+        if(sta){
+        var datas = $('#'+formid).serialize()+"&operate="+sta;
+        }else{
+        var datas = $('#'+formid).serialize();
+        }
+        $('#dialog-btn-submit').unbind('click');
+        $.ajax({
+            url:url,
+            dataType:"html",
+            data: datas,
+            success:function(data){
+                $('#dialog-context').html(data);
+                $('#dialog-btn-submit').bind('click', function(event){
+                    $.ajax({
+                        url:url,
+                        type:'POST',
+                        data: $('#dialog-form').serialize(),
+                        success:function(data){
+                            $('#Dialog').modal('hide');
 
+                            alert(data);
+                            window.location.reload;
+                        },
+                        error:function(){
+                            alert('审批失败，请重试!');
+                        }
+                    });
+                
+                });
+            },
+            error:function(){
+                $('#dialog-context').html("数据加载失败");
+            }
+        });
+        $('#Dialog').modal('show');
+        return false;
+    }
+  </script>
   <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!-- there's an IE separated stylesheet with the following resets for IE -->
@@ -65,15 +109,27 @@
     </li>
 
     <!-- Dashboard -->
-    <li class="">
-      <a href="{% url 'home' %}">
+    <li class="" id="finance">
+      <a href="#finance-list" class="accordion-toggle" data-toggle="collapse">
           <span class="icon">
             <i class="icon-dashboard"></i>
           </span>
           <span class="text">
-           财务总览 
+           财务管理 <b class="caret"></b>
           </span>
       </a>
+
+      <ul id="finance-list" class="collapse secondary"> 
+        <li class="">
+          <a href="{% url 'home' %}">
+            财务总览
+          </a>
+        <li class="">
+          <a href="{% url 'examineshow' %}">
+            审批信息
+          </a>
+        </li>
+       </ul>
     </li>
 
     <!-- Components -->
@@ -294,6 +350,19 @@
     <a class="btn modal-next medium-blue">Next <i class="icon-arrow-right icon-white"></i></a>
   </div>
 </div>
-
+<div id="Dialog" class="modal hide fade" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+        <div class="modal-header">
+            <a href="#" class="close" data-dismiss="modal">&times;</a>
+            <h4 id="dialog-title">审核</h4>
+        </div>
+        <div class="modal-body">
+            <div class="divDialogElements" id="dialog-context">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn" onclick="$('#Dialog').modal('hide');">Cancel</a>
+            <a id="dialog-btn-submit" class="btn btn-primary">Submit</a>
+        </div>
+    </div>
 </body>
 </html>

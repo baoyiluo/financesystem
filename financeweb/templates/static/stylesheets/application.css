@@ -6622,12 +6622,13 @@ input[type="submit"].btn {
   background-clip: padding-box;
   outline: none; }
   /* line 41, bootstrap/_modals.scss */
-  .modal.fade {
+/*  .modal.fade {
     -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
     -o-transition: opacity 0.3s linear, top 0.3s ease-out;
     transition: opacity 0.3s linear, top 0.3s ease-out;
     top: -25%; }
+*/
   /* line 45, bootstrap/_modals.scss */
   .modal.fade.in {
     top: 50%; }
@@ -17635,16 +17636,16 @@ ul.task-list {
   /* allow content to popup out (i.e tooltips) */ }
 
 /* line 49, extensions/bootstrap-modal.css.scss */
-.modal.fade {
+/*.modal.fade {
   top: -100%;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
   -o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
   transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out; }
-
+*/
 /* line 57, extensions/bootstrap-modal.css.scss */
 .modal.fade.in {
-  top: 50%; }
+  top: 30%; }
 
 /* line 61, extensions/bootstrap-modal.css.scss */
 .modal-body {

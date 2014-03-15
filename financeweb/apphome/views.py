@@ -18,10 +18,3 @@ def auth_required(view):
             return HttpResponseRedirect(reverse("signin"))
     return decorator
 
-class Index(View):
-    template_name = 'index.html'
-    @auth_required
-    def get(self, request):
-        username =request.user.username
-        objects = models.Finance.objects.all()
-        return render_to_response(self.template_name, {'username': username, 'objects':objects})

@@ -12,6 +12,12 @@ class Finance(models.Model):
     maneycount = models.DecimalField(max_digits=8,decimal_places=2)
     financename = models.CharField(_('name'), max_length=80)
     financeintro = models.CharField(_('intro'), max_length=80)
-    examineperson = models.ManyToManyField(User, null=True, blank=True, related_name="examineperson", verbose_name=_("users"))
+    examineperson = models.ManyToManyField(User, through="FinanceUser", null=True, blank=True, related_name="examineperson", verbose_name=_("users"))
     financetype = models.CharField(_('financetype'), max_length=80, choices=ACCOUNT_CHOICE)
-    status = models.BooleanField(_("Status"), default=True)
+    status = models.IntegerField(_("Status"), default=0) #0审批中，1审批通过，-1审批驳回
+class FinanceUser(models.Model):
+    finance = models.ForeignKey(Finance)
+    user = models.ForeignKey(User)
+    status = models.BooleanField(_("examinestatus"), default=False)
+    examinedate = models.DateTimeField(auto_now_add=True)
+    examineinfo = models.CharField(_("examineinfo"), max_length=80, null=True, blank=True)
