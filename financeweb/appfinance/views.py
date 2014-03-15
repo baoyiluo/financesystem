@@ -14,7 +14,7 @@ class ExamineMessages(View):
         financelist = self.model.objects.filter(status=0)
         count=0
         for finance in financelist:
-            if request.user not in finance.examineperson.all():  
+            if request.user not in finance.examineperson.all():
                 count+=1
         return HttpResponse(count)
 
@@ -77,7 +77,7 @@ class ExaminemakeShow(View):
         else:
             financeuser = models.FinanceUser(user=user, finance=financeobject, status=status, examineinfo=info)
             financeuser.save()
-            if  length(models.FinanceUser.objects.filter(user=user, finance=financeobject,status=True)) == 4:
+            if  len(models.FinanceUser.objects.filter(user=user, finance=financeobject,status=True)) == 4:
                     financeobject.status = 1 
             elif models.FinanceUser.objects.filter(user=user, finance=financeobject,status=False):
                     financeobject.status = -1 

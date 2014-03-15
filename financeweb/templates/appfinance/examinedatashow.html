@@ -11,7 +11,7 @@
     <td>{{object.startperson.username}}</td>
     <td>{{object.maneycount}}</td>
     <td><input type="button" name="operate" class="btn btn-small green" style="width:58px;" onclick="ajax_to_dialog('examineform{{object.pk}}','{% url "examinemakeshow" %}','通过申请单',1)" value="通过"/>&#160;
-        <input type="submit" name="operate" class="btn btn-small red" style="width:58px;" onclick="return ajax_to_dialog('examineform{{object.pk}}','{% url "examinemakeshow" %}','驳回申请单',0)" value="驳回"/></td>
+        <input type="submit" name="operate" class="btn btn-small red" style="width:58px;" onclick="return ajax_to_dialog('examineform{{object.pk}}','{% url "examinemakeshow" %}','驳回申请单')" value="驳回"/></td>
 </tr>
 </form>
 {% endfor %}

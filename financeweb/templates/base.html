@@ -16,7 +16,7 @@
         $values=window.document.location.pathname.split('/')[1];
         $('#'+$values).addClass('active');
     });
-    function ajax_to_dialog(formid, url, title,sta=false){
+    function ajax_to_dialog(formid, url, title,sta){
         $('#dialog-title').html(title); 
         if(sta){
         var datas = $('#'+formid).serialize()+"&operate="+sta;
