@@ -5,6 +5,7 @@ from django.views.generic.base import View
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from financeweb.apphome import models
+from django.core.urlresolvers import reverse
 from financeweb.apphome.views import auth_required
 
 class ExamineMessages(View):
@@ -21,10 +22,20 @@ class Index(View):
     template_name = 'appfinance/index.html'
     @auth_required
     def get(self, request):
-        username = request.user.username
+        user = request.user
+        username = user.username
         objects = models.Finance.objects.all()
         return render_to_response(self.template_name, {'username': username, 'objects':objects})
 
+class SelfFinance(View):
+    template_name = 'appfinance/selffinance.html'
+    @auth_required
+    def get(self, request):
+        user = request.user
+        username = user.username
+        objects = models.Finance.objects.filter(startperson=user)
+        return render_to_response(self.template_name, {'username': username, 'objects':objects})
+        
 class ExamineDate(View):
     template_name = 'appfinance/examinedatashow.html'
     model = models.Finance
@@ -90,3 +101,22 @@ class ExaminemakeShow(View):
                     financeobject.status = -1 
             financeobject.save()
         return HttpResponse(u'审批成功')
+
+class MakeFinance(View):
+    template_name="appfinance/makefinance.html"
+    @auth_required
+    def get(self, request, *args, **kwargs):
+        return render_to_response(self.template_name) 
+    @auth_required
+    def post(self, request, *args, **kwargs):
+        financename = request.POST.get('financename','')
+        financeinfo = request.POST.get('financeinfo','')
+        financetype = request.POST.get('financetype','')
+        financecount = request.POST.get('financecount','')
+        if financename and financeinfo and financetype and financecount:
+            user = request.user
+            newobject = models.Finance(startperson=user, maneycount=financecount, financename=financename, financeintro=financeinfo, financetype=financetype)
+            newobject.save()
+            return HttpResponseRedirect(reverse("home"))
+        else:
+            return HttpResponse(u'名称:'+financename+u' 描述:'+financeinfo+u'类型:'+financetype+u'金额:'+financecount)
