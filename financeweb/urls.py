@@ -60,6 +60,7 @@ urlpatterns += patterns('',
             PROJECT_ROOT, "templates/static/bootstrap").replace("\\", "/")}),
     ("^sign/", include('financeweb.appsign.urls')),
     ("^finance/", include('financeweb.appfinance.urls')),
+    url("^$", views.Index.as_view(), name="index"),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------

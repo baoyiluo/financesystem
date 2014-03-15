@@ -1,4 +1,5 @@
 #-!- coding:utf-8 -!-
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.utils.translation import ugettext as _
 from django.views.generic.base import View
@@ -20,7 +21,7 @@ class SignInView(View):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect("/") # Success
+                return HttpResponseRedirect(reverse("home")) # Success
             else:
                 return HttpResponse(_(u"用户已被禁用！"))
         else:
@@ -31,4 +32,4 @@ class SignOutView(View):
     def get(self, request):
         from django.contrib.auth import logout
         logout(request)
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(reverse("home"))

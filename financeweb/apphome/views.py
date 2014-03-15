@@ -17,4 +17,7 @@ def auth_required(view):
         else:
             return HttpResponseRedirect(reverse("signin"))
     return decorator
-
+class Index(View):
+    @auth_required
+    def get(self, request):
+        return HttpResponseRedirect(reverse("home"))
