@@ -109,17 +109,61 @@ class MakeFinance(View):
     template_name="appfinance/makefinance.html"
     @auth_required
     def get(self, request, *args, **kwargs):
-        return render_to_response(self.template_name) 
+        financetypelist=["-1"]
+        financepk = request.GET.get('financepk','')
+        if financepk:
+            try:
+                financeobject = models.Finance.objects.get(pk=int(financepk))
+                financename = financeobject.financename
+                financeinfo = financeobject.financeintro
+                financecount = financeobject.maneycount
+                financetype = financeobject.financetype
+            except:
+                financename = ""
+                financeinfo = ""
+                financecount = ""
+                financetype = "-1"
+        else:
+            financename = ""
+            financeinfo = ""
+            financecount = ""
+            financetype = "-1"
+        context={
+            'financepk':financepk,
+            'financename':financename,
+            'financeinfo':financeinfo,
+            'financetypelist':financetypelist,
+            'financetype':financetype,
+            'financecount':financecount
+
+        }
+        return render_to_response(self.template_name,context) 
     @auth_required
     def post(self, request, *args, **kwargs):
         financename = request.POST.get('financename','')
         financeinfo = request.POST.get('financeinfo','')
         financetype = request.POST.get('financetype','')
         financecount = request.POST.get('financecount','')
+        financepk = request.POST.get('financepk','')
+        try:
+            float(financecount)
+        except:
+            return HttpResponse(u"金额必需是浮点数或整数")
         if financename and financeinfo and financetype and financecount:
             user = request.user
-            newobject = models.Finance(startperson=user, maneycount=financecount, financename=financename, financeintro=financeinfo, financetype=financetype)
+            if financepk:
+                newobject = models.Finance.objects.get(pk=int(financepk))
+                financeuserlist = newobject.financeuser_set.all()
+                for financeuser in financeuserlist:
+                    financeuser.delete()
+                newobject.maneycount = financecount
+                newobject.financename = financename
+                newobject.financeintro = financeinfo
+                newobject.financetype = financetype
+                newobject.status = 0 
+            else:
+                newobject = models.Finance(startperson=user, maneycount=financecount, financename=financename, financeintro=financeinfo, financetype=financetype)
             newobject.save()
             return HttpResponseRedirect(reverse("home"))
         else:
-            return HttpResponse(u'名称:'+financename+u' 描述:'+financeinfo+u'类型:'+financetype+u'金额:'+financecount)
+            return HttpResponse(u'名称:'+financename+u' 描述:'+financeinfo+u'类型:'+financetype+u'金额:'+financecount+u" 都不能为空,且金额为浮点型")

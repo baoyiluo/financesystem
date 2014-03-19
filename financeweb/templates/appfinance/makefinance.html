@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% block "contents" %}
 <form method="post">
+<input name="financepk" value="{{financepk}}" type="text" style="display:none;"/>
 <table class="table table-striped table-bordered table-condensed table-hover" style="width:80%;margin:auto;margin-top:10px;">
-<tr><td>名称</td><td><input type="text" name="financename" style="margin-bottom:0px;"/></td></tr>
-<tr><td>描述</td><td><textarea name="financeinfo"style="margin-bottom:0px;"></textarea></td></tr>
+<tr><td>名称</td><td><input type="text" name="financename" value="{{financename}}"style="margin-bottom:0px;"/></td></tr>
+<tr><td>描述</td><td><textarea name="financeinfo" style="margin-bottom:0px;">{{financeinfo}}</textarea></td></tr>
 <tr><td>类型</td><td>
                 <select name="financetype" value="0" style="width:206px;margin-bottom:0px;">
-                <option value="-1">出账</option>
+                {% for onetype in financetypelist %}
+                <option value="{{onetype}}"{% if onetype == financetype %}selected="selected"{% endif %}>出账</option>
+                {% endfor %}
                 </select>
                 </td>
 </tr>
-<tr><td>金额(元)</td><td><input type="text" name="financecount"style="margin-bottom:0px;"/></td></tr>
+<tr><td>金额(元)</td><td><input type="text" name="financecount"style="margin-bottom:0px;"value="{{financecount}}"/></td></tr>
 <tr><td colspan="2"><input type="reset" class="btn"value="重置" style="width:100px;margin-left:300px;"/>&#160;&#160;&#160;&#160;<input type="submit" class="btn" value="提交" style="width:100px;"/></td></tr>
 </table>
 </form>
