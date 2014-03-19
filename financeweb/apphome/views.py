@@ -8,9 +8,6 @@ import models
 def auth_required(view):
     """"身份认证装饰器"""
     def decorator(self, request, *args, **kwargs):
-        print args
-        print '-------------------'
-        print kwargs
         username = request.user.username 
         if username:
             return view(self, request, *args, **kwargs)

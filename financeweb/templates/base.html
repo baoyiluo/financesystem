@@ -49,9 +49,8 @@
                         data: $('#dialog-form').serialize(),
                         success:function(data){
                             $('#Dialog').modal('hide');
-
                             alert(data);
-                            window.location.reload;
+                            window.location.reload();
                         },
                         error:function(){
                             alert('审批失败，请重试!');

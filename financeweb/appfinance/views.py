@@ -82,23 +82,26 @@ class ExaminemakeShow(View):
         else:
             status = False 
         if models.FinanceUser.objects.filter(user=user, finance=financeobject): 
-            #import pdb; pdb.set_trace()
             financeuser=models.FinanceUser.objects.get(user=user, finance=financeobject)
             financeuser.status = status
             financeuser.examineinfo = info
             financeuser.save()
-            if  models.FinanceUser.objects.filter(user=user, finance=financeobject,status=True) == 4:
+            if  len(models.FinanceUser.objects.filter(finance=financeobject,status=True)) == 4:
                     financeobject.status = 1 
-            elif models.FinanceUser.objects.filter(user=user, finance=financeobject,status=False):
+            elif models.FinanceUser.objects.filter(finance=financeobject,status=False):
                     financeobject.status = -1 
+            else:
+                    financeobject.status = 0 
             financeobject.save()
         else:
             financeuser = models.FinanceUser(user=user, finance=financeobject, status=status, examineinfo=info)
             financeuser.save()
-            if  len(models.FinanceUser.objects.filter(user=user, finance=financeobject,status=True)) == 4:
+            if  len(models.FinanceUser.objects.filter(finance=financeobject,status=True)) == 4:
                     financeobject.status = 1 
-            elif models.FinanceUser.objects.filter(user=user, finance=financeobject,status=False):
+            elif models.FinanceUser.objects.filter(finance=financeobject,status=False):
                     financeobject.status = -1 
+            else:
+                    financeobject.status = 0 
             financeobject.save()
         return HttpResponse(u'审批成功')
 
